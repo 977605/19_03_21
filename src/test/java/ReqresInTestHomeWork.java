@@ -2,7 +2,6 @@ import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
-import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
