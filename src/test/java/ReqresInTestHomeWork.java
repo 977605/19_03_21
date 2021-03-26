@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
@@ -14,6 +15,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ReqresInTestHomeWork extends TestBase {
 
+    @Step("Получение списка User, проверка списка по возрастанию Id")
     @Test
     public void listUsersTestCheckData() {
         Response response =
