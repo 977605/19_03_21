@@ -2,6 +2,7 @@ import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
+import io.restassured.specification.ResponseSpecification;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -15,9 +16,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ReqresInTestHomeWork extends TestBase {
 
-    @Step("Получение списка User, проверка списка по возрастанию Id")
+    @Step("Получение списка User, проверка ссылки avatar")
     @Test
-    public void listUsersTestCheckData() {
+    public void listUsersTestCheckUserAvatar() {
         Response response =
                 given()
                         .contentType("application/json")
@@ -37,6 +38,22 @@ public class ReqresInTestHomeWork extends TestBase {
             assertThat(s, equalTo("https://reqres.in/img/faces/"));
         }
 
+    }
+
+    @Step("Получение списка User, проверка списка по возрастанию Id")
+    @Test
+    public void listUsersTestCheckUserId() {
+        Specifications.installSpec(Specifications.requestSpec(), Specifications.responseSpec());
+        Response response =
+                given()
+                        .spec(Specifications.requestSpec())
+                        .when()
+                        .get("/api/users?page=2")
+                        .then()
+                        .spec(Specifications.responseSpec())
+                        .extract().response();
+
+        JsonPath jsonPath = response.jsonPath();
         List<HashMap<String, Object>> data2 = jsonPath.getList("data");
         ArrayList<Integer> id = new ArrayList();
         for (HashMap<String, Object> singleObjectId : data2) {
@@ -48,5 +65,6 @@ public class ReqresInTestHomeWork extends TestBase {
         System.out.println(flag);
     }
 }
+
 
 
