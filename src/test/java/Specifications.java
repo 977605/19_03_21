@@ -20,8 +20,4 @@ public class Specifications {
         return resSpec;
     }
 
-    public static void installSpec(RequestSpecification requestSpec, ResponseSpecification responseSpec) {
-        RestAssured.requestSpecification = requestSpec;
-        RestAssured.responseSpecification = responseSpec;
-    }
 }
